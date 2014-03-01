@@ -1,0 +1,72 @@
+#include<stdio.h>
+/*la idea es una agenda que al final te ponga todos los nombres juntos con las
+fechas de nacimiento y los telefonos, el problema es que me aparecen mal los datos al final.
+nota: soy nuevo en esto apenas estoy aprendiendo hace unos dias asi que seguramente
+sea un error en el uso de alguno de los comandos*/
+
+typedef struct fechas{
+int dia;
+int mes;
+int anio;
+}fecha;
+
+typedef struct contactos{
+char nombre[40];
+long telefono;
+fecha nacimiento;
+}contacto;
+
+fecha nueva_fecha(){
+    fecha fecha1;
+printf("ingrese dia: ");
+fflush(stdin);
+scanf("%d",&fecha1.dia);
+printf("ingrese mes: ");
+fflush(stdin);
+scanf("%d",&fecha1.mes);
+printf("ingrese anio: ");
+fflush(stdin);
+scanf("%d",&fecha1.anio);
+return fecha1;
+}
+
+
+contacto crear_contacto(){
+contacto nuevo;
+printf("ingrese nombre: ");
+fflush(stdin);
+gets(nuevo.nombre);
+printf("ingrese telefono: ");
+fflush(stdin);
+scanf("%d",&nuevo.telefono);
+printf("ingrese fecha de nacimiento: \n");
+fflush(stdin);
+nuevo.nacimiento = nueva_fecha();
+return nuevo;
+}
+
+
+
+int main(){
+    char x='s';
+    contacto c1[50];
+    int i;
+    fecha f1[50];
+    int j=0;
+for (i=1;i<50;i++){
+ while (x=='s'){
+c1[i]=crear_contacto();
+f1[i]=c1[i].nacimiento;
+printf("\n\nquiere ingresar otro contacto? [s/n]");
+fflush(stdin);
+scanf("%c",&x);
+printf("\n\n");
+j++;
+}
+continue;
+}
+for (i=0;i<j;i++){
+printf("\n %s nacido el %d/%d/%d tiene numero telefonico %d",c1[i].nombre,f1[i].dia,f1[i].mes,f1[i].anio,c1[i].telefono);
+}
+return 0;
+}
